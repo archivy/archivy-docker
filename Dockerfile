@@ -73,6 +73,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
         xdg-utils \
         pandoc@testing \
         musl=1.1.24-r10 \
+        libstdc++ \
     # Creating non-root user and group for running Archivy
     && addgroup -S -g 1000 archivy \
     && adduser -h /archivy -g "User account for running Archivy" \
@@ -101,7 +102,7 @@ EXPOSE 5000
 STOPSIGNAL SIGTERM
 
 # Healthcheck command used to check if Archivy is up and running
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=5 CMD healthcheck.sh
+# HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=5 CMD healthcheck.sh
 
 # Entrypoint - Run 'entrypoint.sh' script. Any command given to 'docker container run' will be added as an argument
 # to the ENTRYPOINT command below. The 'entrypoint.sh' script needs to receive 'run' as an argument in order to set up
