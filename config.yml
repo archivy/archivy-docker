@@ -32,4 +32,4 @@ SEARCH_CONF:
       highlight:
         max_analyzed_offset: 100000000
   url: http://elasticsearch:9200
-USER_DIR: /archivy
+USER_DIR: /archivy/data
