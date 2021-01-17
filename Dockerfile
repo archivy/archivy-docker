@@ -53,7 +53,6 @@ ARG VERSION
 # Installing pinned version of Archivy using pip
 RUN pip3.9 install --prefix=/install archivy==$VERSION
 
-
 # Starting with a base image of python:3.8-alpine for the final stage
 FROM python:3.9-alpine
 
@@ -82,8 +81,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
     # (If this directory isn't created, Archivy exits with a "permission denied" error)
     && mkdir -p /archivy/data \
     # Changing ownership of all files in user's home directory
-    && chown -R archivy:archivy /archivy_config \
-    && chown -R archivy:archivy /archivy_data
+    && chown -R archivy:archivy /archivy
 
 # Copying binaries and libraries from builder stage
 COPY --from=builder --chown=archivy:archivy /install /usr/local/
@@ -95,11 +93,8 @@ COPY --chown=archivy:archivy config.yml /archivy_config/config.yml
 # Run as user 'archivy'
 USER archivy
 
-# Creating mount point for persistent configuration
-VOLUME /archivy_config
-
 # Creating mount point for persistent data
-VOLUME /archivy_data
+VOLUME /archivy/data
 
 # Exposing port 5000
 EXPOSE 5000
