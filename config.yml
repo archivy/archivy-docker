@@ -23,12 +23,12 @@ SEARCH_CONF:
         analyzer:
           rebuilt_standard:
             filter:
-              - lowercase
-              - kstem
-              - trim
-              - unique
-              stopwords: _english_
-              tokenizer: standard
+            - lowercase
+            - kstem
+            - trim
+            - unique
+            stopwords: _english_
+            tokenizer: standard
       highlight:
         max_analyzed_offset: 100000000
   url: http://elasticsearch:9200
