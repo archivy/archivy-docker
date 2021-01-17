@@ -7,7 +7,7 @@ This document will cover the following:
 
 - [x] [Prerequisites](#prerequisites)
 - [x] [Building Archivy](#building-archivy)
-  - [x] [Cloning this repository](#quick-start)
+  - [x] [Cloning this repository](#cloning-this-respository)
   - [x] [Optional: Configure your Installation](#optional-configure-your-installation)
 - [x] [Running Archivy](#running-archivy)
   - [x] [Quick Start](#quick-start)
