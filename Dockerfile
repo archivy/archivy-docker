@@ -82,20 +82,24 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
     # (If this directory isn't created, Archivy exits with a "permission denied" error)
     && mkdir -p /archivy/data \
     # Changing ownership of all files in user's home directory
-    && chown -R archivy:archivy /archivy
+    && chown -R archivy:archivy /archivy_config
+    && chown -R archivy:archivy /archivy_data
 
 # Copying binaries and libraries from builder stage
 COPY --from=builder --chown=archivy:archivy /install /usr/local/
 # Copying entrypoint and healthcheck script from host
 COPY --chown=archivy:archivy entrypoint.sh healthcheck.sh /usr/local/bin/
 # Copying pre-generated config.yml from host
-COPY --chown=archivy:archivy config.yml /archivy/.local/share/archivy/config.yml
+COPY --chown=archivy:archivy config.yml /archivy_config/config.yml
 
 # Run as user 'archivy'
 USER archivy
 
+# Creating mount point for persistent configuration
+VOLUME /archivy_config
+
 # Creating mount point for persistent data
-VOLUME /archivy/data
+VOLUME /archivy_data
 
 # Exposing port 5000
 EXPOSE 5000
