@@ -1,5 +1,5 @@
 HOST: 0.0.0.0
-INTERNAL_DIR: /archivy_config/.local/share/archivy
+INTERNAL_DIR: /archivy_config
 PANDOC_HIGHLIGHT_THEME: pygments
 PORT: 5000
 SEARCH_CONF:
