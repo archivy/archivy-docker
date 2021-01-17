@@ -88,7 +88,7 @@ COPY --from=builder --chown=archivy:archivy /install /usr/local/
 # Copying entrypoint and healthcheck script from host
 COPY --chown=archivy:archivy entrypoint.sh healthcheck.sh /usr/local/bin/
 # Copying pre-generated config.yml from host
-COPY --chown=archivy:archivy config.yml /archivy_config/config.yml
+COPY --chown=archivy:archivy config.yml /archivy/.local/share/archivy/config.yml
 
 # Run as user 'archivy'
 USER archivy
