@@ -1,5 +1,5 @@
 HOST: 0.0.0.0
-INTERNAL_DIR: /archivy_config
+INTERNAL_DIR: /archivy/.local/share/archivy
 PANDOC_HIGHLIGHT_THEME: pygments
 PORT: 5000
 SEARCH_CONF:
@@ -32,4 +32,4 @@ SEARCH_CONF:
       highlight:
         max_analyzed_offset: 100000000
   url: http://elasticsearch:9200
-USER_DIR: /archivy_data
+USER_DIR: /archivy
