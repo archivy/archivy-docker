@@ -1,15 +1,26 @@
-version: '3.8'
+version: '3'
 
 services:
 
   archivy:
     image: harshavardhanj/archivy:latest
+    container_name: archivy
     ports:
-      - "5000:5000"
+      - 5000:5000
+    environment:
+      - FLASK_DEBUG=0
+      - ELASTICSEARCH_ENABLED=1
+      - ELASTICSEARCH_URL=http://elasticsearch:9200/
     volumes:
-      - archivyData:/archivy/data
-    cap_drop:
-      - ALL
+      - archivy_data:/archivy:rw
+  elasticsearch:
+    image: elasticsearch:7.9.0
+    container_name: elasticsearch
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    environment:
+      - "discovery.type=single-node"
 
 volumes:
-  archivyData:
+  archivy_data:
+  elasticsearch_data:
