@@ -49,18 +49,18 @@ If you don't have Docker installed, take a look at the [official installation gu
 The file `Dockerfile` is much more portable than the `local-build.Dockerfile` as you do not need any other additional files to build the image. The Dockerfile automatically downloads the source code during the build stage. Just download `Dockerfile` and run the following command to build the image:
 
 ```shell
-$ docker build -t archivy:1.0 -f /path/to/Dockerfile .
+$ docker build -t archivy:1.0 --build-arg VERSION=1.0 -f /path/to/Dockerfile .
 ```
-This tags the image with the name `archivy:1.0`. Technically, you do not need to mention the path to `Dockerfile` as long as the Dockerfile is titled `Dockerfile`. If the name is anything but that, you will need to mention the path using the `-f` flag. So the above command is the same as
+This tags the image with the name `archivy:1.0` and passes the VERSION build argument to the dockerfile. Make sure you change the version to whichever version of Archivy you want. Technically, you do not need to mention the path to `Dockerfile` as long as the Dockerfile is titled `Dockerfile`. If the name is anything but that, you will need to mention the path using the `-f` flag. So the above command is the same as
 
 ```sh
-$ docker build -t archivy:1.0 .
+$ docker build -t archivy:1.0 --build-arg VERSION=1.0 .
 ```
 
 There's an easier way to build the image. You can pass the URL to the GitHub repository directly to `docker`, and as long as there’s a file named `Dockerfile` in the root of the repository, Docker will build it.
 
 ```sh
-$ docker build -t archivy:1.0 https://github.com/Uzay-G/archivy.git#docker
+$ docker build -t archivy:1.0 --build-arg VERSION=1.0 https://github.com/Uzay-G/archivy.git#docker
 ```
 This will clone the GitHub repository and use the cloned repository as context. The Dockerfile at the root of the repository is used as `Dockerfile`.
 
@@ -74,15 +74,17 @@ This will clone the GitHub repository and use the cloned repository as context. 
 
 ### Quick Start
 
-You can get an instance of Archivy up and running for testing purposes with the following one-liner:
+After you've built an image, you can get an instance of Archivy up and running for testing purposes with the following one-liner:
 
 ```sh
-$ docker run -d --name archivy-test -p 5000:5000 harshavardhanj/archivy
+$ docker run -d --name archivy-test -p 5000:5000 -v archivy_data:/archivy archivy:1.0
 ```
 
 > `--name`													——		Name of the container(can be anything)
 >
-> `-p/--publish host:container`		  ——		Bind port on host to port on container
+> `-p/--publish host:container`		  ——		Bind port on host to port on container (the host port can be anything)
+> 
+> `-v volume:/container/mount/point` ——   Mount a persistent volume into the container's filesystem (the name of the volume can be anything)
 
 The above command runs a container with the name `archivy-test` and binds port `5000` on the host to port `5000` on the container. That way, you can access the server at `http://localhost:5000/` on the device. If you wish to access the server at `http://localhost:9000/` instead, you would change the argument to `-p 9000:5000`. This container runs in *detached* mode, meaning that no output is printed to the terminal. To view the logs, run
 
