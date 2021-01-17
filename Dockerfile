@@ -80,6 +80,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
     # Creating directory in which Archivy's files will be stored
     # (If this directory isn't created, Archivy exits with a "permission denied" error)
     && mkdir -p /archivy/data \
+    && mkdir -p /archivy/.local/share/archivy \
     # Changing ownership of all files in user's home directory
     && chown -R archivy:archivy /archivy
 
