@@ -121,7 +121,7 @@ However, the base installation has no users, so you will be unable to log in.
 
 To create a new admin, run:
 
-`docker exec -it archivy archivy create-admin <your-username>`
+`docker exec -it archivy archivy create-admin --password <your-password> <your-username>`
 
   * `docker exec -it archivy` tells Docker to execute a command on the archivy container with an interactive pseudo-TTY. Read more [here](https://docs.docker.com/engine/reference/commandline/exec/).
   * `archivy create-admin --password <your-password> <your-username>` is the command run by docker which creates a new admin account with the password and username provided.
