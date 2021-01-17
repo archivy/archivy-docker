@@ -6,16 +6,17 @@ services:
     build:
       context: .
       args: 
-        -VERSION=0.11.1
+        - VERSION=0.11.1 # update this to whatever the latest release of Archivy is
     container_name: archivy
+#   networks: # If you are using a reverse proxy, you will need to edit this file to add Archivy to your reverse proxy network. You can also remove the host-to-container port mapping, as that should be handled by the reverse proxy
     ports:
-      - 5000:5000
+      - 5000:5000 # this is a host-to-container port mapping. If your Docker environment already uses the host's port `:5000`, then you can remap this to any `<port>:5000` you need
     environment:
-      - FLASK_DEBUG=0
-      - ELASTICSEARCH_ENABLED=1
-      - ELASTICSEARCH_URL=http://elasticsearch:9200/
+      - FLASK_DEBUG=0 # this sets the level of verbosity printed to the Archivy container's logs
+      - ELASTICSEARCH_ENABLED=1 # this sets whether the container should check if an Elasticsearch container is running before it attempts to start the Archivy server. Note: This *does not* check whether the elasticsearch server is working properly, only if an Elasticsearch container is working. Further, this setting is overridden by the contents of `config.yml`
+      - ELASTICSEARCH_URL=http://elasticsearch:9200/ # sets the URL that the `entrypoint.sh` script should use to check for a running Elasticsearch container
     volumes:
-      - archivy_data:/archivy:rw
+      - archivy_data:/archivy:rw # this looks for a Docker volume on the host called `archivy_data` and mounts it into the container's `/archivy` directory. You can change the name of the Docker volume on the host, but not the mount path
   elasticsearch:
     image: elasticsearch:7.9.0
     container_name: elasticsearch
@@ -25,5 +26,5 @@ services:
       - "discovery.type=single-node"
 
 volumes:
-  archivy_data:
-  elasticsearch_data:
+  archivy_data: # this creates the archivy_data volume that we call for under services/archivy/volumes:
+  elasticsearch_data: # this creates the elasticsearch_data volume that we call for under services/archivy/volume:
