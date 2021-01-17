@@ -82,7 +82,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
     # (If this directory isn't created, Archivy exits with a "permission denied" error)
     && mkdir -p /archivy/data \
     # Changing ownership of all files in user's home directory
-    && chown -R archivy:archivy /archivy_config
+    && chown -R archivy:archivy /archivy_config \
     && chown -R archivy:archivy /archivy_data
 
 # Copying binaries and libraries from builder stage
