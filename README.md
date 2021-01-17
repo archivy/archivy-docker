@@ -5,22 +5,12 @@ a container, in this case, with Docker(although you can use any other container 
 
 This document will cover the following:
 
-- [x] [Building a container image of Archivy](#building-archivy)
-- [x] [Running Archivy as a container](#running-archivy)
-  - [x] [Quick start](#quick-start)
-  - [x] [Running Archivy along with persistent data storage](#with-data-persistence)
-  - [x] [Running Archivy with environment variable injection](#environment-variable-injection)
-  - [x] [Demo on ‘*Play With Docker*’](#try-demo-on-play-with-docker)
-  - [x] [Running Archivy using Docker Compose](#using-docker-compose)
-    - [x] [Running Archivy with Elasticsearch for full text search capabilities(with Docker Compose)](#running-archivy-with-elasticsearch)
-
-Planned for the future:
-
-- [ ] [Running Archivy using Docker Swarm(container orchestrator)](#using-docker-swarm)
-- [ ] [Running Archivy on Kubernetes as a production-ready setup](#using-kubernetes)
-- [ ] [Running Archivy on OpenStack as a production-ready setup(will be done only **after** the aforementioned points are completed)](#using-openstack)
-
-
+- [x] [Prerequisites](#prerequisites)
+- [x] [Building Archivy](#building-archivy)
+  - [x] [Cloning this repository](#quick-start)
+  - [x] [Optional: Configure your Installation](#optional-configure-your-installation)
+- [x] [Running Archivy](#running-archivy)
+  - [x] [Quick Start](#quick-start)
 
 > **NOTE**:
 > Parts of the document may be incomplete as it is a work in progress. In time, more information will be added to each section/topic. If some part of the documentation is ambiguous, feel free to ask questions or make suggestions on the Issues page of the project. If necessary, additional revisions to the documentation can be made based on user feedback.
