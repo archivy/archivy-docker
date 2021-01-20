@@ -51,14 +51,13 @@ ARG BUILD_DATE
 ARG VCS_REF
 
 # Setting VCS URL
-ARG ARCHIVY_VCS_URL="https://github.com/Uzay-G/archivy"
+ARG ARCHIVY_VCS_URL="https://github.com/archivy/archivy"
 
 # Add 'testing' repository and install dependencies
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk update && apk add --no-cache \
       git \
       xdg-utils \
-      pandoc@testing \
       musl=1.1.24-r10 \
     # Clone the repository
     && git clone ${ARCHIVY_VCS_URL} \
@@ -111,10 +110,10 @@ LABEL org.opencontainers.image.vendor="Uzay G" \
       org.opencontainers.image.authors="https://github.com/Uzay-G" \
       org.opencontainers.image.title="Archivy" \
       org.opencontainers.image.licenses="MIT" \
-      org.opencontainers.image.url="https://github.com/Uzay-G/archivy/tree/master/" \
-      org.label-schema.vcs-url="https://github.com/Uzay-G/archivy/tree/master/" \
-      org.opencontainers.image.documentation="https://github.com/Uzay-G/archivy/blob/master/README.md" \
-      org.opencontainers.image.source="https://github.com/Uzay-G/archivy/blob/docker/Dockerfile.source" \
+      org.opencontainers.image.url="https://github.com/archivy/archivy/tree/master/" \
+      org.label-schema.vcs-url="https://github.com/archivy/archivy/tree/master/" \
+      org.opencontainers.image.documentation="https://github.com/archivy/archivy/blob/master/README.md" \
+      org.opencontainers.image.source="https://github.com/archivy/archivy/blob/docker/Dockerfile.source" \
       org.opencontainers.image.description="Archivy is a self-hosted knowledge repository that \
       allows you to safely preserve useful content that contributes to your knowledge bank." \
       org.opencontainers.image.created=$BUILD_DATE \
@@ -124,5 +123,5 @@ LABEL org.opencontainers.image.vendor="Uzay G" \
       org.opencontainers.image.version="source" \
       org.label-schema.version="source" \
       org.label-schema.schema-version="1.0" \
-      software.author.repository="https://github.com/Uzay-G/archivy" \
+      software.author.repository="https://github.com/archivy/archivy" \
       software.release.version="source"

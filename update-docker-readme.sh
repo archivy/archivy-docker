@@ -42,7 +42,7 @@ getFile() {
   # If 2 arguments are given, and if they are not empty strings
   if [ $# -eq 2 ] && [ -n "$1" ] && [ -n "$2" ] ; then
     # Variables that point to file's URL and file name
-    FileUrl="${1:="https://raw.githubusercontent.com/Uzay-G/archivy/master/requirements.txt"}"
+    FileUrl="${1:="https://raw.githubusercontent.com/archivy/archivy/master/requirements.txt"}"
     FileName="${2:="requirements.txt"}"
   else
     printf '%s\n' "Improper arguments given. Expecting file's URL and name of file." 1>&2 \

@@ -4,12 +4,12 @@
 ![Docker Image Size (latest semver)](https://img.shields.io/docker/image-size/uzayg/archivy)
 ![Docker Pulls](https://img.shields.io/docker/pulls/uzayg/archivy)
 
-![GitHub](https://img.shields.io/github/license/Uzay-G/archivy)
-![GitHub contributors](https://img.shields.io/github/contributors/Uzay-G/archivy)
-![GitHub Release Date](https://img.shields.io/github/release-date/Uzay-G/archivy)
+![GitHub](https://img.shields.io/github/license/archivy/archivy)
+![GitHub contributors](https://img.shields.io/github/contributors/archivy/archivy)
+![GitHub Release Date](https://img.shields.io/github/release-date/archivy/archivy)
 
-![GitHub pull requests](https://img.shields.io/github/issues-pr/Uzay-G/archivy)
-![GitHub stars](https://img.shields.io/github/stars/Uzay-G/archivy?style=social)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/archivy/archivy)
+![GitHub stars](https://img.shields.io/github/stars/archivy/archivy?style=social)
 
 
 ![PyPI](https://img.shields.io/pypi/v/archivy)
@@ -57,28 +57,28 @@
 
 # Quick Reference
 
-- Maintained by: [Uzay Girit](https://github.com/Uzay-G/archivy/tree/docker)
+- Maintained by: [Uzay Girit](https://github.com/archivy/archivy/tree/docker)
 
-- Where to get help: [GitHub Project Page](https://github.com/Uzay-G/archivy), [Archivy Discord Server](https://discord.gg/uQsqyxB)  
+- Where to get help: [GitHub Project Page](https://github.com/archivy/archivy), [Archivy Discord Server](https://discord.gg/uQsqyxB)  
 
-- Where to file issues: [Project's GitHub Issues Page](https://github.com/Uzay-G/archivy/issues)
-![GitHub issues](https://img.shields.io/github/issues/Uzay-G/archivy)
+- Where to file issues: [Project's GitHub Issues Page](https://github.com/archivy/archivy/issues)
+![GitHub issues](https://img.shields.io/github/issues/archivy/archivy)
 
-- Source of this description: [`docker` branch's `docs` directory](https://github.com/Uzay-G/archivy/tree/docker/docs)
+- Source of this description: [`docker` branch's `docs` directory](https://github.com/archivy/archivy/tree/docker/docs)
 
 # Supported Tags And Respective `Dockerfile` Links
 
-- [`stable`, `latest`](https://github.com/Uzay-G/archivy/blob/docker/Dockerfile)
-- [`0.8.4`, `0.8.3`, `0.8.2`, `0.8.1`, `0.8.0`, `0.8`](https://github.com/Uzay-G/archivy/blob/docker/Dockerfile)
-- [`0.7.3`, `0.7.2`, `0.7.1`, `0.7.0`, `0.7`](https://github.com/Uzay-G/archivy/blob/docker/Dockerfile)
-- [`0.6.2`, `0.6.1`, `0.6.0`, `0.6`](https://github.com/Uzay-G/archivy/blob/docker/Dockerfile)
-- [`0.5.0`, `0.5`](https://github.com/Uzay-G/archivy/blob/docker/Dockerfile)
-- [`0.4.1`, 0.4`](https://github.com/Uzay-G/archivy/blob/docker/Dockerfile)
-- [`0.4.0`](https://github.com/Uzay-G/archivy/blob/docker/Dockerfile)
-- [`0.3.0`, `0.3`](https://github.com/Uzay-G/archivy/blob/docker/Dockerfile)
-- [`0.2.0`, `0.2`](https://github.com/Uzay-G/archivy/blob/docker/Dockerfile)
-- [`0.1.0`, `0.1`](https://github.com/Uzay-G/archivy/blob/docker/Dockerfile)
-- [`source`](https://github.com/Uzay-G/archivy/blob/docker/Dockerfile.master)
+- [`stable`, `latest`](https://github.com/archivy/archivy/blob/docker/Dockerfile)
+- [`0.8.4`, `0.8.3`, `0.8.2`, `0.8.1`, `0.8.0`, `0.8`](https://github.com/archivy/archivy/blob/docker/Dockerfile)
+- [`0.7.3`, `0.7.2`, `0.7.1`, `0.7.0`, `0.7`](https://github.com/archivy/archivy/blob/docker/Dockerfile)
+- [`0.6.2`, `0.6.1`, `0.6.0`, `0.6`](https://github.com/archivy/archivy/blob/docker/Dockerfile)
+- [`0.5.0`, `0.5`](https://github.com/archivy/archivy/blob/docker/Dockerfile)
+- [`0.4.1`, 0.4`](https://github.com/archivy/archivy/blob/docker/Dockerfile)
+- [`0.4.0`](https://github.com/archivy/archivy/blob/docker/Dockerfile)
+- [`0.3.0`, `0.3`](https://github.com/archivy/archivy/blob/docker/Dockerfile)
+- [`0.2.0`, `0.2`](https://github.com/archivy/archivy/blob/docker/Dockerfile)
+- [`0.1.0`, `0.1`](https://github.com/archivy/archivy/blob/docker/Dockerfile)
+- [`source`](https://github.com/archivy/archivy/blob/docker/Dockerfile.master)
 
 The images are also tagged with their respective git commit hash. All tags are listed under `Tags` tab in DockerHub.
 
@@ -251,7 +251,7 @@ If the values are not set by the user, they are assigned default values during r
 
 For those with DockerHub accounts, you can try a version of Archivy on Play With Docker by clicking on the badge below. This will require you to log in to your DockerHub account.
 
-[![Try in ‘Play With Docker’](https://github.com/play-with-docker/stacks/raw/cff22438cb4195ace27f9b15784bbb497047afa7/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/Uzay-G/archivy/docker-compose.yml)
+[![Try in ‘Play With Docker’](https://github.com/play-with-docker/stacks/raw/cff22438cb4195ace27f9b15784bbb497047afa7/assets/images/button.png)](https://labs.play-with-docker.com/?stack=https://raw.githubusercontent.com/archivy/archivy/docker-compose.yml)
 
 This instance of Archivy is based on the following Docker Compose file:
 
@@ -589,7 +589,7 @@ $ docker run -d --name elasticsearch-test -p 9200:9200 --cap-drop=ALL --cap-add=
 
 ### With Docker Compose
 
-If you're launching the containers using Docker Compose, use the compose files present in the [repository's `docker` branch](https://github.com/Uzay-G/archivy/tree/docker).
+If you're launching the containers using Docker Compose, use the compose files present in the [repository's `docker` branch](https://github.com/archivy/archivy/tree/docker).
 
 If you wish to run *just* Archivy, use the `docker-compose.yml` file, and if you wish to run both Archivy *and* Elasticsearch, use the `docker-compose-with-elasticsearch.yml` file.
 
@@ -747,7 +747,7 @@ GPL-2.0-or-later
 
 # Licence
 
-This project is licensed under the MIT License - see the [LICENSE file](https://raw.githubusercontent.com/Uzay-G/archivy/master/LICENSE) for details. 
+This project is licensed under the MIT License - see the [LICENSE file](https://raw.githubusercontent.com/archivy/archivy/master/LICENSE) for details. 
 
 As with all Docker images, these likely also contain other software which may be under other licenses (such as Bash, etc from the base distribution, along with any direct or indirect dependencies of the primary software being contained).
 
