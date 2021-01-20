@@ -117,7 +117,3 @@ To create a new admin, run:
   * `archivy create-admin --password <your-password> <your-username>` is the command run by docker which creates a new admin account with the password and username provided.
 
 Congratulations! You can now log into your new Archivy instance (complete with search and persistent data) with the credentials you created above. Happy archiving!
-
-# Contributors
-
-- @HarshaVardhanJ - Creator and maintainer of the image
