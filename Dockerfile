@@ -69,8 +69,6 @@ ARG VERSION
 # Installing xdg-utils and pandoc
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk update && apk add --no-cache \
-        xdg-utils \
-        pandoc@testing \
         musl=1.1.24-r10 \
         libstdc++ \
     # Creating non-root user and group for running Archivy
