@@ -53,7 +53,6 @@ ARG VERSION
 # Installing pinned version of Archivy using pip
 RUN pip3.9 install --prefix=/install archivy==$VERSION
 
-
 # Starting with a base image of python:3.8-alpine for the final stage
 FROM python:3.9-alpine
 
@@ -73,6 +72,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
         xdg-utils \
         pandoc@testing \
         musl=1.1.24-r10 \
+        libstdc++ \
     # Creating non-root user and group for running Archivy
     && addgroup -S -g 1000 archivy \
     && adduser -h /archivy -g "User account for running Archivy" \
@@ -80,6 +80,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
     # Creating directory in which Archivy's files will be stored
     # (If this directory isn't created, Archivy exits with a "permission denied" error)
     && mkdir -p /archivy/data \
+    && mkdir -p /archivy/.local/share/archivy \
     # Changing ownership of all files in user's home directory
     && chown -R archivy:archivy /archivy
 
@@ -87,6 +88,8 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
 COPY --from=builder --chown=archivy:archivy /install /usr/local/
 # Copying entrypoint and healthcheck script from host
 COPY --chown=archivy:archivy entrypoint.sh healthcheck.sh /usr/local/bin/
+# Copying pre-generated config.yml from host
+COPY --chown=archivy:archivy config.yml /archivy/.local/share/archivy/
 
 # Run as user 'archivy'
 USER archivy
@@ -101,7 +104,7 @@ EXPOSE 5000
 STOPSIGNAL SIGTERM
 
 # Healthcheck command used to check if Archivy is up and running
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=5 CMD healthcheck.sh
+# HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=5 CMD healthcheck.sh
 
 # Entrypoint - Run 'entrypoint.sh' script. Any command given to 'docker container run' will be added as an argument
 # to the ENTRYPOINT command below. The 'entrypoint.sh' script needs to receive 'run' as an argument in order to set up
