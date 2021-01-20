@@ -56,6 +56,7 @@ ARG ARCHIVY_VCS_URL="https://github.com/archivy/archivy"
 # Add 'testing' repository and install dependencies
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk update && apk add --no-cache \
+	  build-base \
       git \
       xdg-utils \
       musl=1.1.24-r10 \
