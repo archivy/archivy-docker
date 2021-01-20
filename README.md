@@ -10,8 +10,8 @@ This document will cover the following:
   - [x] [Cloning this repository](#cloning-this-respository)
   - [x] [Optional: Configure your Installation](#optional-configure-your-installation)
 - [x] [Running Archivy](#running-archivy)
-  - [x] [Via Docker-Compose](#via-docker-compose)
-  - [x] [Via Docker Run](#via-docker-run)
+  - [x] [Via Docker-Compose](#via-docker-compose-recommended)
+  - [x] [Via Docker Run](#via-docker-run-not-recommended)
   - [x] [Application Setup](#application-setup)
 
 > **NOTE**:
