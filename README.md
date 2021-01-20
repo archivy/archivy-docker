@@ -10,7 +10,9 @@ This document will cover the following:
   - [x] [Cloning this repository](#cloning-this-respository)
   - [x] [Optional: Configure your Installation](#optional-configure-your-installation)
 - [x] [Running Archivy](#running-archivy)
-  - [x] [Quick Start](#quick-start)
+  - [x] [Via Docker-Compose](#via-docker-compose)
+  - [x] [Via Docker Run](#via-docker-run)
+  - [x] [Application Setup](#application-setup)
 
 > **NOTE**:
 > Parts of the document may be incomplete as it is a work in progress. In time, more information will be added to each section/topic. If some part of the documentation is ambiguous, feel free to ask questions or make suggestions on the Issues page of the project. If necessary, additional revisions to the documentation can be made based on user feedback.
