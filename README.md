@@ -97,13 +97,26 @@ After you've edited the `docker-compose.yml` file to your liking, you're ready t
 
 ## Running Archivy
 
-### Quick Start
+### Via Docker-Compose (Recommended)
 
 After completing the steps in the Building Archivy section, you are ready to start your Archivy server.
 
 To start the docker-compose stack, simply run the following in the directory containing the docker-compose file:
 
 `docker-compose up -d`
+
+### Via Docker Run (Not Recommended)
+
+If you opt not to install or use Docker-Compose, you can instead use the following commands:
+
+`docker network create archivy` this will create the Docker network we need to connect the two containers together.
+
+`docker run -d --name elasticsearch -v elasticsearch_data:/usr/share/elasticsearch/data -e discovery.type=single-node elasticsearch:7.9.0` to create and start your elasticsearch instance, which will act as the search backend for your Archivy database.
+`docker build -t archivy:local-build --build-arg VERSION=<latest-version> .` Make sure to set <latest-version> to whatever the latest release version of Archivy is. 
+`docker run -d --name archivy -p 5000:5000 -e FLASK_DEBUG=0 -e ELASTICSEARCH_ENABLED=1 -e ELASTICSEARCH_URL=http://elasticsearch:9200/ -v archivy_data:/archivy --network archivy archivy:local-build` This will bring up the archivy instance and connect it to the `archivy` network, but we're not done yet. The Elasticsearch instance needs to be connected to the network with a specific hostname.
+`docker network connect --alias elasticsearch archivy elasticsearch`.
+
+### Application Setup
 
 You should now be able to access your Archivy installation at `http://<your-docker-host>:5000` where <your-docker-host> is the IP of the machine running your Docker environment. 
 
@@ -117,3 +130,7 @@ To create a new admin, run:
   * `archivy create-admin --password <your-password> <your-username>` is the command run by docker which creates a new admin account with the password and username provided.
 
 Congratulations! You can now log into your new Archivy instance (complete with search and persistent data) with the credentials you created above. Happy archiving!
+
+# Contributors
+
+- @HarshaVardhanJ - Creator and maintainer of the image
