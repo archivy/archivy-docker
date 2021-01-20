@@ -75,7 +75,7 @@ services:
     container_name: archivy
 #   networks: # If you are using a reverse proxy, you will need to edit this file to add Archivy to your reverse proxy network. You can also remove the host-to-container port mapping, as that should be handled by the reverse proxy
     ports:
-      - 5000:5000 # this is a host-to-container port mapping. If your Docker environment already uses the host's port `:5000`, then you can remap this to any `<port>:5000` you need
+      - 5000:5000 # this is a host-to-container port mapping. If your Docker environment already uses the host's port :5000, then you can remap this to any <port>:5000 you need
     environment:
       - FLASK_DEBUG=0 # this sets the level of verbosity printed to the Archivy container's logs
       - ELASTICSEARCH_ENABLED=1 # this sets whether the container should check if an Elasticsearch container is running before it attempts to start the Archivy server. Note: This *does not* check whether the elasticsearch server is working properly, only if an Elasticsearch container is working. Further, this setting is overridden by the contents of `config.yml`
@@ -132,7 +132,3 @@ To create a new admin, run:
   * `archivy create-admin --password <your-password> <your-username>` is the command run by docker which creates a new admin account with the password and username provided.
 
 Congratulations! You can now log into your new Archivy instance (complete with search and persistent data) with the credentials you created above. Happy archiving!
-
-# Contributors
-
-- @HarshaVardhanJ - Creator and maintainer of the image
