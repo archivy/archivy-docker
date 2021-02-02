@@ -43,80 +43,58 @@ docker-compose version 1.12.0, build unknown
 
 If you don't have Docker-compose installed, take a look at the [official installation guide](https://docs.docker.com/compose/install/) for your device.
 
-
-## Building Archivy
-
-### Cloning this repository
-
-Before you can build the Dockerfile, you will need to clone this repository into the directory you want to contain your Archivy installation. It is recommended that you create a directory for Archivy before cloning the repository (something like `~/docker/archivy/`). Run the following command to clone the repository:
-
-```sh
-git clone https://github.com/archivy/archivy-docker.git
-```
-
-This will clone the git respository hosted at `https://github.com/archivy/archivy-docker` into the `./archivy-docker` folder relative to your current working directory. 
-
-### (Optional) Configure your installation
-
-After cloning, you can make changes to the `docker-compose.yml` to tailor it to your environment. **Note:** Make sure to update the `VERSION=` build argument in the `docker-compose.yml` file to whichever 
-
-* `docker-compose.yml` contains the instructions Docker will use to create your containers. 
-
-```yml
-version: '3'
-
-services:
-
-  archivy:
-    build:
-      context: .
-      args: 
-        -VERSION=0.11.1 # update this to whatever the latest release of Archivy is
-    container_name: archivy
-#   networks: # If you are using a reverse proxy, you will need to edit this file to add Archivy to your reverse proxy network. You can also remove the host-to-container port mapping, as that should be handled by the reverse proxy
-    ports:
-      - 5000:5000 # this is a host-to-container port mapping. If your Docker environment already uses the host's port :5000, then you can remap this to any <port>:5000 you need
-    environment:
-      - FLASK_DEBUG=0 # this sets the level of verbosity printed to the Archivy container's logs
-      - ELASTICSEARCH_ENABLED=1 # this sets whether the container should check if an Elasticsearch container is running before it attempts to start the Archivy server. Note: This *does not* check whether the elasticsearch server is working properly, only if an Elasticsearch container is working. Further, this setting is overridden by the contents of `config.yml`
-      - ELASTICSEARCH_URL=http://elasticsearch:9200/ # sets the URL that the `entrypoint.sh` script should use to check for a running Elasticsearch container
-    volumes:
-      - archivy_data:/archivy:rw # this looks for a Docker volume on the host called `archivy_data` and mounts it into the container's `/archivy` directory. You can change the name of the Docker volume on the host, but not the mount path
-  elasticsearch:
-    image: elasticsearch:7.9.0
-    container_name: elasticsearch
-    volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
-    environment:
-      - "discovery.type=single-node"
-
-volumes:
-  archivy_data: # this creates the archivy_data volume that we call for under services/archivy/volumes:
-  elasticsearch_data: # this creates the elasticsearch_data volume that we call for under services/archivy/volume:
-```
-
-After you've edited the `docker-compose.yml` file to your liking, you're ready to start Archivy.
-
-## Running Archivy
+## Archivy Setup
 
 ### Via Docker-Compose (Recommended)
 
-After completing the steps in the Building Archivy section, you are ready to start your Archivy server.
-
-To start the docker-compose stack, simply run the following in the directory containing the docker-compose file:
-
-`docker-compose up -d`
+1) Download `docker-compose.yml` into the folder you want to use for Archivy (something like `~/docker/archivy`). Edit the compose file as needed for your network. 
+2) In the folder from which you will start docker-compose, create a directory for persistent storage of your notes: `mkdir ./archivy_data`. Both the Elasticsearch and Archivy containers also need persistent configuration volumes, but this is handled by docker-managed volumes by default. Note: If you want to use a direct host filesystem mount for the Archivy config files, you will need to copy the `config.yml` from this directory into that directory before bringing the stack up.
+3) Start the docker-compose stack with: `docker-compose up -d`.
 
 ### Via Docker Run (Not Recommended)
 
 If you opt not to install or use Docker-Compose, you can instead use the following commands:
 
-`docker network create archivy` this will create the Docker network we need to connect the two containers together.
+1) Create the network to which both the Elasticsearch and Archivy containers will connect.
 
-`docker run -d --name elasticsearch -v elasticsearch_data:/usr/share/elasticsearch/data -e discovery.type=single-node elasticsearch:7.9.0` to create and start your elasticsearch instance, which will act as the search backend for your Archivy database.
-`docker build -t archivy:local-build --build-arg VERSION=<latest-version> .` Make sure to set <latest-version> to whatever the latest release version of Archivy is. 
-`docker run -d --name archivy -p 5000:5000 -e FLASK_DEBUG=0 -e ELASTICSEARCH_ENABLED=1 -e ELASTICSEARCH_URL=http://elasticsearch:9200/ -v archivy_data:/archivy --network archivy archivy:local-build` This will bring up the archivy instance and connect it to the `archivy` network, but we're not done yet. The Elasticsearch instance needs to be connected to the network with a specific hostname.
-`docker network connect --alias elasticsearch archivy elasticsearch`.
+```
+docker network create archivy
+```
+
+2) Navigate to the folder in which you would like to store your Archivy notes. Then create the necessary host directories with `mkdir ./archivy_data`
+
+3) Create and start your elasticsearch instance, which will act as the search backend for your Archivy database:
+```
+docker run -d \
+--name elasticsearch \
+-v elasticsearch_data:/usr/share/elasticsearch/data \
+-e discovery.type=single-node \
+elasticsearch:7.9.0
+``` 
+Because both Elasticsearch and Archivy will be on the same internal Docker network, you do not need to publish any ports.
+
+4) Bring up the Archivy instance. 
+
+```
+docker run -d \
+--name archivy \
+-p 5000:5000 \
+-e FLASK_DEBUG=0 \
+-e ELASTICSEARCH_ENABLED=1 \
+-e ELASTICSEARCH_URL=http://elasticsearch:9200/ \
+-v ./archivy_data:/archivy/data \
+-v archivy_config:/archivy/.local/share/archivy \
+--network archivy \
+uzayg/archivy:latest 
+```
+
+5) Connect the Elasticsearch instance to the archivy network with the `elasticsearch` network alias.
+
+```
+docker network connect --alias elasticsearch archivy elasticsearch
+```
+
+Done!
 
 ### Application Setup
 
