@@ -3,10 +3,7 @@ version: '3'
 services:
 
   archivy:
-    build:
-      context: .
-      args: 
-        - VERSION=0.11.1 # update this to whatever the latest release of Archivy is
+    image: uzayg/archivy:v1.0.0
     container_name: archivy
 #   networks: # If you are using a reverse proxy, you will need to edit this file to add Archivy to your reverse proxy network. You can also remove the host-to-container port mapping, as that should be handled by the reverse proxy
     ports:
@@ -16,15 +13,16 @@ services:
       - ELASTICSEARCH_ENABLED=1 # this sets whether the container should check if an Elasticsearch container is running before it attempts to start the Archivy server. Note: This *does not* check whether the elasticsearch server is working properly, only if an Elasticsearch container is working. Further, this setting is overridden by the contents of `config.yml`
       - ELASTICSEARCH_URL=http://elasticsearch:9200/ # sets the URL that the `entrypoint.sh` script should use to check for a running Elasticsearch container
     volumes:
-      - archivy_data:/archivy:rw # this looks for a Docker volume on the host called `archivy_data` and mounts it into the container's `/archivy` directory. You can change the name of the Docker volume on the host, but not the mount path
+      - ./archivy_data:/archivy/data # this mounts the ./archivy_data/ folder from the host's working directory into the container
+      - archivy_config:/archivy/.local/share/archivy # this mounts the docker-managed archivy_config volume from the host's working directory into the container
   elasticsearch:
     image: elasticsearch:7.9.0
     container_name: elasticsearch
     volumes:
-      - elasticsearch_data:/usr/share/elasticsearch/data
+      - elasticsearch_data:/usr/share/elasticsearch/data:rw # this mounts the docker-managed elasticsearch_data volume into the container and makes it writable
     environment:
       - "discovery.type=single-node"
 
 volumes:
-  archivy_data: # this creates the archivy_data volume that we call for under services/archivy/volumes:
-  elasticsearch_data: # this creates the elasticsearch_data volume that we call for under services/archivy/volume:
+  elasticsearch_data:
+  archivy_config:
