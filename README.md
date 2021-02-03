@@ -48,7 +48,14 @@ If you don't have Docker-compose installed, take a look at the [official install
 ### Via Docker-Compose (Recommended)
 
 1) Download `docker-compose.yml` into the folder you want to use for Archivy (something like `~/docker/archivy`). Edit the compose file as needed for your network. 
-2) In the folder from which you will start docker-compose, create a directory for persistent storage of your notes: `mkdir ./archivy_data`. Both the Elasticsearch and Archivy containers also need persistent configuration volumes, but this is handled by docker-managed volumes by default. Note: If you want to use a direct host filesystem mount for the Archivy config files, you will need to copy the `config.yml` from this directory into that directory before bringing the stack up.
+
+2) In the folder from which you will start docker-compose, create a directory for persistent storage of your notes: `mkdir ./archivy_data`. 
+
+Note: If your user ID is anything other than 1000 (you can check with the `id` command), you will need to change the owner of the directory to the 1000 UID and 1000 GID: `chown -R 1000:1000 ./archivy_data`. 
+Both the Elasticsearch and Archivy containers also need persistent configuration volumes, but this is handled by docker-managed volumes by default. 
+
+Note: If you want to use a direct host filesystem mount for the Archivy config files, you will need to copy the `config.yml` from this directory into that directory before bringing the stack up.
+
 3) Start the docker-compose stack with: `docker-compose up -d`.
 
 ### Via Docker Run (Not Recommended)
@@ -61,7 +68,9 @@ If you opt not to install or use Docker-Compose, you can instead use the followi
 docker network create archivy
 ```
 
-2) Navigate to the folder in which you would like to store your Archivy notes. Then create the necessary host directories with `mkdir ./archivy_data`
+2) Navigate to the folder in which you would like to store your Archivy notes. Then create the necessary host directories with `mkdir ./archivy_data`. 
+
+Note: If your user ID is anything other than 1000 (you can check with the `id` command), you will need to change the owner of the directory to the 1000 UID and 1000 GID: `chown -R 1000:1000 ./archivy_data`. 
 
 3) Create and start your elasticsearch instance, which will act as the search backend for your Archivy database:
 ```
