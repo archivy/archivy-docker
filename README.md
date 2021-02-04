@@ -13,6 +13,7 @@ This document will cover the following:
   - [x] [Via Docker-Compose](#via-docker-compose-recommended)
   - [x] [Via Docker Run](#via-docker-run-not-recommended)
   - [x] [Application Setup](#application-setup)
+- [x] [Installing Plugins](#installing-plugins)
 
 > **NOTE**:
 > Parts of the document may be incomplete as it is a work in progress. In time, more information will be added to each section/topic. If some part of the documentation is ambiguous, feel free to ask questions or make suggestions on the Issues page of the project. If necessary, additional revisions to the documentation can be made based on user feedback.
@@ -119,3 +120,14 @@ To create a new admin, run:
   * `archivy create-admin --password <your-password> <your-username>` is the command run by docker which creates a new admin account with the password and username provided.
 
 Congratulations! You can now log into your new Archivy instance (complete with search and persistent data) with the credentials you created above. Happy archiving!
+
+## Installing Plugins
+
+To install plugins into your Dockerized Archivy instance, you can simply run `pip` inside the container. For example:
+
+`docker exec archivy pip install archivy_git` to install the [archivy-git](https://github.com/archivy/archivy-git) plugin. 
+
+**NOTE**: Plugins will persist as long as the container's system volume does. If you turn off your Archivy instance `docker-compose down`, you will destroy the container's system volume. Turning off your Archivy instance with `docker container stop archivy` will not cause this issue. 
+
+Note: Some plugins will require depencies installed into the container (e.g. [archivy-hn](https://github.com/archivy/archivy-hn)). In such cases, follow the Docker installation instructions provided by the plugin maintainer. If none exist, open an issue. 
+
