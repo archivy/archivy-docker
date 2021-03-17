@@ -4,6 +4,7 @@ PANDOC_HIGHLIGHT_THEME: pygments
 PORT: 5000
 SEARCH_CONF:
   enabled: 1
+  engine: elasticsearch
   index_name: dataobj
   search_conf:
     mappings:
