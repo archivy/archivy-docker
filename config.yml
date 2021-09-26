@@ -6,7 +6,7 @@ SEARCH_CONF:
   enabled: 1
   engine: elasticsearch
   index_name: dataobj
-  search_conf:
+  es_processing_conf:
     mappings:
       properties:
         body:
