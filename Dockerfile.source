@@ -58,6 +58,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
     && apk update && apk add --no-cache \
       git \
 	  build-base \
+	  ripgrep \
     # Clone the repository
     && git clone ${ARCHIVY_VCS_URL} \
     && cd archivy \
