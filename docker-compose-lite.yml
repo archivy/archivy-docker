@@ -3,7 +3,7 @@ version: '3'
 services:
 
   archivy:
-    image: uzayg/archivy-lite:latest
+    image: uzayg/archivy:latest
     container_name: archivy
 #   networks: # If you are using a reverse proxy, you will need to edit this file to add Archivy to your reverse proxy network. You can also remove the host-to-container port mapping, as that should be handled by the reverse proxy
     ports:
@@ -11,8 +11,4 @@ services:
     environment:
       - FLASK_DEBUG=0 # this sets the level of verbosity printed to the Archivy container's logs
     volumes:
-      - ./archivy_data:/archivy/data # this mounts the ./archivy_data/ folder from the host's working directory into the container
-      - archivy_config:/archivy/.local/share/archivy # this mounts the docker-managed archivy_config volume from the host's working directory into the container
-
-volumes:
-  archivy_config:
+      - ./archivy_data:/archivy/data

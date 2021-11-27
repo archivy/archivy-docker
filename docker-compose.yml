@@ -8,10 +8,6 @@ services:
 #   networks: # If you are using a reverse proxy, you will need to edit this file to add Archivy to your reverse proxy network. You can also remove the host-to-container port mapping, as that should be handled by the reverse proxy
     ports:
       - 5000:5000 # this is a host-to-container port mapping. If your Docker environment already uses the host's port `:5000`, then you can remap this to any `<port>:5000` you need
-    environment:
-      - FLASK_DEBUG=0 # this sets the level of verbosity printed to the Archivy container's logs
-      - ELASTICSEARCH_ENABLED=1 # this sets whether the container should check if an Elasticsearch container is running before it attempts to start the Archivy server. Note: This *does not* check whether the elasticsearch server is working properly, only if an Elasticsearch container is working. Further, this setting is overridden by the contents of `config.yml`
-      - ELASTICSEARCH_URL=http://elasticsearch:9200/ # sets the URL that the `entrypoint.sh` script should use to check for a running Elasticsearch container
     volumes:
       - ./archivy_data:/archivy/data # this mounts the ./archivy_data/ folder from the host's working directory into the container
       - archivy_config:/archivy/.local/share/archivy # this mounts the docker-managed archivy_config volume from the host's working directory into the container
