@@ -14,7 +14,7 @@
 #    5. Adds a non-root user and group to run Archivy, creates the  #
 #       directory which Archivy uses to store its data, and changes #
 #       ownership of all files in the non-root user's home dir.     #
-#    6. The ownership of all copied files is set to       #
+#    6. The ownership of all copied files is set to                 #
 #       archivy user and group.                                     #
 #    7. Sets the 'run as' user to 'archivy'.                        #
 #    8. Exposes port 5000 on the container.                         #
