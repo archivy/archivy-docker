@@ -9,7 +9,7 @@
 #   use with ripgrep                                                #
 #####################################################################
 
-FROM python:3.9-alpine
+FROM python:3.9-slim AS builder
 
 # Archivy version
 ARG VERSION
@@ -17,6 +17,8 @@ ARG VERSION
 # Installing pinned version of Archivy using pip
 RUN pip3.9 install --prefix=/install archivy==$VERSION
 
+
+FROM python:3.9-alpine
 
 # ARG values for injecting metadata during build time
 # NOTE: When using ARGS in a multi-stage build, remember to redeclare
@@ -47,7 +49,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
 # Copying binaries and libraries from builder stage
 COPY --from=builder --chown=archivy:archivy /install /usr/local/
 # Copying pre-generated config.yml from host
-COPY --chown=archivy:archivy config-light.yml /archivy/.local/share/archivy/config.yml
+COPY --chown=archivy:archivy config-lite.yml /archivy/.local/share/archivy/config.yml
 
 # Run as user 'archivy'
 USER archivy

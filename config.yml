@@ -3,4 +3,5 @@ INTERNAL_DIR: /archivy/.local/share/archivy
 SEARCH_CONF:
   enabled: 1
   engine: elasticsearch
+  url: http://elasticsearch:9200/
 USER_DIR: /archivy/data

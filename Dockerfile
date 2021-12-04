@@ -1,4 +1,4 @@
-########    Dockerfile for Archivy Built On Alpine Linux     ########
+#/######    Dockerfile for Archivy Built On Alpine Linux     ########
 #                                                                   #
 #####################################################################
 #        CONTAINERISED ARCHIVY BUILT ON TOP OF ALPINE LINUX         #
@@ -6,8 +6,9 @@
 #                                                                   #
 # This Dockerfile does the following:                               #
 #                                                                   #
-#    1. Starts with Python3.8 based on Alpine 3.12 for the final    #
-#       stage.                                                      #
+#    1. Starts with a base image of Python3.9 built on Debian       #
+#       Buster Slim to be used as builder stage. (then replaced     #
+#       with Alpine 3.9 (some dependencies fail otherwise (brotli)) #
 #    2. Pins a version of archivy.                                  #
 #    3. Installs Archivy using pip in the /install directory.       #
 #    4. Creates a non-root user account and group which will be     #
@@ -22,14 +23,15 @@
 #####################################################################
 
 
+
+# Starting with base image of python3.9 built on Debian Buster Slim
+FROM python:3.9-slim AS builder
+# Installing pinned version of Archivy using pip
 # Archivy version
 ARG VERSION
-
-# Starting with a base image of python:3.8-alpine for the final stage
-FROM python:3.9-alpine
-# Installing pinned version of Archivy using pip
 RUN pip3.9 install --prefix=/install archivy==$VERSION
 
+FROM python:3.9-alpine
 
 # ARG values for injecting metadata during build time
 # NOTE: When using ARGS in a multi-stage build, remember to redeclare
@@ -40,8 +42,6 @@ ARG VCS_REF
 
 # Archivy version
 ARG VERSION
-
-# Installing xdg-utils and pandoc
 RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
     && apk update && apk add --no-cache \
         build-base \
@@ -57,7 +57,10 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
     # Changing ownership of all files in user's home directory
     && chown -R archivy:archivy /archivy
 
+COPY --from=builder --chown=archivy:archivy /install /usr/local/
 # Copying pre-generated config.yml from host
+COPY --chown=archivy:archivy entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
 COPY --chown=archivy:archivy config.yml /archivy/.local/share/archivy/config.yml
 
 # Run as user 'archivy'
@@ -69,7 +72,7 @@ EXPOSE 5000
 # System call signal that will be sent to the container to exit
 STOPSIGNAL SIGTERM
 
-ENTRYPOINT ["archivy"]
+ENTRYPOINT ["entrypoint.sh"]
 
 # The 'run' CMD is required by the 'entrypoint.sh' script to set up the Archivy server. 
 # Any command given to the 'docker container run' will override the CMD below.
