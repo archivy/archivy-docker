@@ -60,7 +60,9 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
     && chown -R archivy:archivy /archivy
 
 # Copying entrypoint and healthcheck script from host
-COPY --chown=archivy:archivy entrypoint.sh healthcheck.sh /usr/local/bin/
+COPY --chown=archivy:archivy entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
+COPY --chown=archivy:archivy config.yml /archivy/.local/share/archivy/config.yml
 
 # Run as user 'archivy'
 USER archivy
@@ -71,13 +73,10 @@ EXPOSE 5000
 # System call signal that will be sent to the container to exit
 STOPSIGNAL SIGTERM
 
-# Healthcheck command used to check if Archivy is up and running
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=5 CMD healthcheck.sh
-
 # Entrypoint - Run 'entrypoint.sh' script. Any command given to 'docker container run' will be added as an argument
 # to the ENTRYPOINT command below. The 'entrypoint.sh' script needs to receive 'start' as an argument in order to set up
 # the Archivy server.
-ENTRYPOINT ["archivy"]
+ENTRYPOINT ["entrypoint.sh"]
 
 # The 'run' CMD is required by the 'entrypoint.sh' script to set up the Archivy server.
 # Any command given to the 'docker container run' will override the CMD below.
