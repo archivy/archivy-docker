@@ -48,7 +48,7 @@ If you don't have Docker-compose installed, take a look at the [official install
 
 2) In the folder from which you will start docker-compose, create a directory for persistent storage of your notes: `mkdir ./archivy_data`. 
 
-3) (optional): Archivy has many [config options](https://archivy.github.io/config/) that allow you to finetune its behavior. If you want to define your own configuration, instead of using the [default ones we wrote for use with Docker](https://github.com/archivy/archivy-docker/blob/main/config.yml), create an `archivy_config` directory in the same directory as `archivy_data`.
+3) (optional): Archivy has many [config options](https://archivy.github.io/config/) that allow you to finetune its behavior. If you want to define your own configuration, instead of using the [default ones we wrote for use with Docker](https://github.com/archivy/archivy-docker/blob/main/config.yml), create an `archivy_config` directory in the same directory as `archivy_data`. We recommend you at least build off the defaults.
 
 Note: If your user ID is anything other than 1000 (you can check with the `id` command), you will need to change the owner of these directories to the 1000 UID and 1000 GID. Example: `chown -R 1000:1000 ./archivy_data`. 
 
