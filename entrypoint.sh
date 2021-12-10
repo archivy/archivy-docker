@@ -54,17 +54,17 @@ env_export() {
 setup() {
   # Setting environment variables(with sensible defaults)
   env_export FLASK_DEBUG "${FLASK_DEBUG:-0}"
-  env_export ELASTICSEARCH_ENABLED "${ELASTICSEARCH_ENABLED:-0}"
+  env_export ELASTICSEARCH_ENABLED "${ELASTICSEARCH_ENABLED:-1}"
   env_export ARCHIVY_PORT "5000"
   env_export ARCHIVY_DATA_DIR "/archivy"
 
   # If ELASTICSEARCH_ENABLED variable is set to 1
   if [ ${ELASTICSEARCH_ENABLED} -eq 1 ] ; then
     # Export with fallback default value for URL
-    env_export ELASTICSEARCH_URL "${ELASTICSEARCH_URL:-"http://localhost:9200/"}"
+    env_export ELASTICSEARCH_URL "${ELASTICSEARCH_URL:-"http://elasticsearch:9200/"}"
   else
     # Export as default value
-    env_export ELASTICSEARCH_URL "http://localhost:9200/"
+    env_export ELASTICSEARCH_URL "http://elasticsearch:9200/"
   fi
 }
 
@@ -189,5 +189,3 @@ main() {
 
 # Calling the main function and passing all arguments to it
 main "$@"
-
-################## End of script

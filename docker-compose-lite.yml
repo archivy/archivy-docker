@@ -11,8 +11,4 @@ services:
     environment:
       - FLASK_DEBUG=0 # this sets the level of verbosity printed to the Archivy container's logs
     volumes:
-      - ./archivy_data:/archivy/data # this mounts the ./archivy_data/ folder from the host's working directory into the container
-      - archivy_config:/archivy/.local/share/archivy # this mounts the docker-managed archivy_config volume from the host's working directory into the container
-
-volumes:
-  archivy_config:
+      - ./archivy_data:/archivy/data

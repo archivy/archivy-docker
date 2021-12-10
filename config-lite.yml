@@ -1,0 +1,5 @@
+HOST: 0.0.0.0
+SEARCH_CONF:
+  enabled: 1
+  engine: ripgrep
+USER_DIR: /archivy/data
