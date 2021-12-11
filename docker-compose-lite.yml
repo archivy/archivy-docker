@@ -3,7 +3,7 @@ version: '3'
 services:
 
   archivy:
-    image: uzayg/archivy-lite:latest
+    image: uzayg/archivy:latest-lite
     container_name: archivy
 #   networks: # If you are using a reverse proxy, you will need to edit this file to add Archivy to your reverse proxy network. You can also remove the host-to-container port mapping, as that should be handled by the reverse proxy
     ports:
