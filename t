@@ -1,1 +1,0 @@
-docker build --output type=image,name="docker.io/uzayg/archivy",push=true --build-arg VERSION="1.5.0" --build-arg BUILD_DATE="$(date -u +'%Y-%m-%dT%H:%M:%SZ')" --tag "docker.io/uzayg/archivy:latest" --file ./Dockerfile .
