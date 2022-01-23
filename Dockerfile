@@ -24,14 +24,10 @@
 
 
 
-# Starting with base image of python3.9 built on Debian Buster Slim
-FROM python:3.9-slim AS builder
+FROM python:3.9-alpine
 # Installing pinned version of Archivy using pip
 # Archivy version
 ARG VERSION
-RUN pip3.9 install --prefix=/install archivy==$VERSION
-
-FROM python:3.9-alpine
 
 # ARG values for injecting metadata during build time
 # NOTE: When using ARGS in a multi-stage build, remember to redeclare
@@ -48,6 +44,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
 		ripgrep \
 		libxml2-dev \
 		libxslt-dev \
+	&& pip3.9 install archivy==$VERSION \
 
     # Creating non-root user and group for running Archivy
     && addgroup -S -g 1000 archivy \
@@ -60,7 +57,6 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
     # Changing ownership of all files in user's home directory
     && chown -R archivy:archivy /archivy
 
-COPY --from=builder --chown=archivy:archivy /install /usr/local/
 # Copying pre-generated config.yml from host
 COPY --chown=archivy:archivy entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
