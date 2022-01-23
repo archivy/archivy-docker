@@ -40,8 +40,8 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
       git \
 	  build-base \
 	  ripgrep \
-	  libxml2 \
-	  libxslt \
+	  libxml2-dev \
+	  libxslt-dev \
     # Clone the repository
     && git clone ${ARCHIVY_VCS_URL} \
     && cd archivy \
