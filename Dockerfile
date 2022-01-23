@@ -47,7 +47,7 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
         build-base \
 		ripgrep \
 		libxml2 \
-		libxslt
+		libxslt \
 
     # Creating non-root user and group for running Archivy
     && addgroup -S -g 1000 archivy \
